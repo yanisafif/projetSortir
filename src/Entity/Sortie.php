@@ -22,6 +22,10 @@ class Sortie
      */
     private $nom;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+
     public function getId(): ?int
     {
         return $this->id;
@@ -38,4 +42,5 @@ class Sortie
 
         return $this;
     }
+
 }
