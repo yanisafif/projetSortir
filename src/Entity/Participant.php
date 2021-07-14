@@ -54,10 +54,10 @@ class Participant implements UserInterface
      */
     private $telephone;
 
-    /**
-     * @ORM\Column(type="string", length=80)
-     */
-    private $campus;
+//    /**
+//     * @ORM\Column(type="string", length=80)  commenter pour créer relation
+//     */
+//    private $campus;
 
     /**
      * @ORM\Column(type="datetime")
@@ -73,6 +73,12 @@ class Participant implements UserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $photo;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="participants")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $campus;
 
     public function getId(): ?int
     {
@@ -203,17 +209,17 @@ class Participant implements UserInterface
         return $this;
     }
 
-    public function getCampus(): ?string
-    {
-        return $this->campus;
-    }
-
-    public function setCampus(string $campus): self
-    {
-        $this->campus = $campus;
-
-        return $this;
-    }
+//    public function getCampus(): ?string
+//    {
+//        return $this->campus;
+//    }
+//
+//    public function setCampus(string $campus): self
+//    {
+//        $this->campus = $campus;
+//
+//        return $this;
+//    }
 
     public function getDateDeCreation(): ?\DateTimeInterface
     {
@@ -247,6 +253,18 @@ class Participant implements UserInterface
     public function setPhoto(?string $photo): self
     {
         $this->photo = $photo;
+
+        return $this;
+    }
+
+    public function getCampus(): ?Campus
+    {
+        return $this->campus;
+    }
+
+    public function setCampus(?Campus $campus): self
+    {
+        $this->campus = $campus;
 
         return $this;
     }
