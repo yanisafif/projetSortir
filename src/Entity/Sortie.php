@@ -47,16 +47,22 @@ class Sortie
      */
     private $infosSortie;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $etat;
+//    /**
+//     * @ORM\Column(type="string", length=255)    commenter pour crée relation
+//     */
+//    private $etat;
 
     /**
      * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="sorties")
      * @ORM\JoinColumn(nullable=false)
      */
     private $campus;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Etat::class, inversedBy="sorties")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $etat;
 
     public function getId(): ?int
     {
@@ -135,17 +141,17 @@ class Sortie
         return $this;
     }
 
-    public function getEtat(): ?string
-    {
-        return $this->etat;
-    }
-
-    public function setEtat(string $etat): self
-    {
-        $this->etat = $etat;
-
-        return $this;
-    }
+//    public function getEtat(): ?string
+//    {
+//        return $this->etat;
+//    }
+//
+//    public function setEtat(string $etat): self
+//    {
+//        $this->etat = $etat;
+//
+//        return $this;
+//    }
 
     public function getCampus(): ?Campus
     {
@@ -155,6 +161,18 @@ class Sortie
     public function setCampus(?Campus $campus): self
     {
         $this->campus = $campus;
+
+        return $this;
+    }
+
+    public function getEtat(): ?Etat
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(?Etat $etat): self
+    {
+        $this->etat = $etat;
 
         return $this;
     }
