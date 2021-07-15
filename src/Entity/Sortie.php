@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\SortieRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -63,6 +65,17 @@ class Sortie
      * @ORM\JoinColumn(nullable=false)
      */
     private $etat;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Participant::class, inversedBy="sorties")
+     */
+    private $participant;
+
+    public function __construct()
+    {
+        $this->relation = new ArrayCollection();
+        $this->participant = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -173,6 +186,30 @@ class Sortie
     public function setEtat(?Etat $etat): self
     {
         $this->etat = $etat;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Participant[]
+     */
+    public function getParticipant(): Collection
+    {
+        return $this->participant;
+    }
+
+    public function addParticipant(Participant $participant): self
+    {
+        if (!$this->participant->contains($participant)) {
+            $this->participant[] = $participant;
+        }
+
+        return $this;
+    }
+
+    public function removeParticipant(Participant $participant): self
+    {
+        $this->participant->removeElement($participant);
 
         return $this;
     }
