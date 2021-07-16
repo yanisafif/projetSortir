@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% include 'inc/nav.html.twig'%}
+    <table style="border: 1px black solid">
+        <th>#</th>
+        <th>Nom</th>
+        {% for cam in campus %}
+            <tr style="border: 1px black solid">
+                <td>{{ cam.id }}</td>
+                <td>{{ cam.nom }}</td>
+            </tr>
+        {% endfor %}
+        <tr>
+            <td></td>
+            {{ form_start(form) }}
+            <td>
+                {{ form_widget(form.nom) }}
+                {{ form_rest(form) }}
+            </td>
+            <td>
+                <button type="submit">Modifier le nom du campus</button>
+            </td>
+            {{ form_end(form) }}
+        </tr>
+
+
+    </table>
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+
