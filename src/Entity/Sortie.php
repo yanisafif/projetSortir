@@ -66,17 +66,6 @@ class Sortie
      */
     private $etat;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Participant::class, inversedBy="sorties")
-     */
-    private $participant;
-
-    public function __construct()
-    {
-        $this->relation = new ArrayCollection();
-        $this->participant = new ArrayCollection();
-    }
-
     public function getId(): ?int
     {
         return $this->id;
@@ -186,30 +175,6 @@ class Sortie
     public function setEtat(?Etat $etat): self
     {
         $this->etat = $etat;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Participant[]
-     */
-    public function getParticipant(): Collection
-    {
-        return $this->participant;
-    }
-
-    public function addParticipant(Participant $participant): self
-    {
-        if (!$this->participant->contains($participant)) {
-            $this->participant[] = $participant;
-        }
-
-        return $this;
-    }
-
-    public function removeParticipant(Participant $participant): self
-    {
-        $this->participant->removeElement($participant);
 
         return $this;
     }

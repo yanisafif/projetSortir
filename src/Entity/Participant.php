@@ -82,16 +82,6 @@ class Participant implements UserInterface
      */
     private $campus;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Sortie::class, mappedBy="participant")
-     */
-    private $sorties;
-
-    public function __construct()
-    {
-        $this->sorties = new ArrayCollection();
-    }
-
     public function getId(): ?int
     {
         return $this->id;
