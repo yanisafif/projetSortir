@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SortieController!{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row mx-5">
+            <div class="col-4">
+                <strong>Filtrer les sorties</strong>
+                <div class="row mx-2 ">
+                    <div class="col-6">
+                        Campus <br>
+                    </div>
+                    <div class="col-6">
+                        <select>
+                            {% for camp in campus %}
+                                <option>{{ camp.nom }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="row mx-2 ">
+                    <div class="col-6">
+                    Le nom de la sortie contient: <br>
+                    </div>
+                    <div class="col-6">
+                        <input type="text" placeholder="search"> <br>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div>
+                    <input id="chk1" type="checkbox">
+                    <label for="chk1">
+                        Sorties dont je suis l'organisateur/trice
+                    </label>
+                </div>
+                <div>
+                    <input id="chk2" type="checkbox">
+                    <label for="chk2">
+                        Sorties auxquelles je suis inscrit/e
+                    </label>
+                </div>
+                <div>
+                    <input id="chk3" type="checkbox">
+                    <label for="chk3">
+                        Sorties auxquelles je ne suis pas inscrit/e
+                    </label>
+                </div>
+                <div>
+                    <input id="chk4" type="checkbox">
+                    <label for="chk4">
+                        Sorties passées
+                    </label>
+                </div>
+            </div>
+            <div class="col-4 d-flex justify-content-center">
+                <input type="submit" value="Rechercher" class="btn btn-primary mx-auto btn-lg" >
+
+            </div>
+        </div>
+        <div class="row mx-5">
+            <table class="table col-8">
+                <thead>
+                    <tr>
+                        <th>Nom de la sortie</th>
+                        <th>Date de la sortie </th>
+                        <th>Clôture</th>
+                        <th>Inscrits/Places</th>
+                        <th>Etat</th>
+                        <th>Inscrit</th>
+                        <th>Organisateur</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for sortie in sorties %}
+                    <tr>
+                        <td>{{ sortie.nom }}</td>
+                        <td>{{ sortie.dateHeureDebut|date("m/d/y h:m") }}</td>
+                        <td>{{ sortie.dateLimiteInscription|date("m/d/y") }}</td>
+                        <td>{{ sortie.nbInscriptionsMax }}</td>
+                        <td>{{ sortie.etat.libelle }}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
