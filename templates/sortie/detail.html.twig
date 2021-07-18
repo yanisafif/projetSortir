@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SortieController!{% endblock %}
+
+{% block body %}
+
+
+<div class ="container">
+    <h2>Afficher une sortie</h2>
+    <table class="table">
+        <tr>
+            <td>Nom de la sortie : {{ sortie.0.nom }}</td>
+            <td>Campus : {{ sortie.0.campus.nom}}</td>
+        </tr>
+        <tr>
+            <td>Date et heure de la sortie : {{ sortie.0.dateHeureDebut|date("d/m/y h:m") }} </td>
+            <td> Lieu : </td>
+        </tr>
+        <tr>
+            <td>Date limite d'inscription : {{ sortie.0.dateLimiteInscription|date("d/m/y h:m") }}</td>
+            <td>Rue : </td>
+        </tr>
+        <tr>
+            <td>Nombre de places : {{ sortie.0.nbInscriptionsMax }}</td>
+            <td>Code postal : </td>
+        </tr>
+        <tr>
+            <td>Durée/minutes : {{ sortie.0.duree }}</td>
+            <td>Latitude : </td>
+        </tr>
+        <tr>
+            <td>Description et infos : {{ sortie.0.infosSortie }}</td>
+            <td>Longitude : </td>
+        </tr>
+    </table>
+    <div class="row">
+        <div class="col-6">
+            <h5>Liste des participants inscrits:</h5>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Pseudo</th>
+                    <th>Nom</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for participant in participants %}
+                    <tr>
+                        <td>{{ participant.pseudo }}</td>
+                        <td>{{ participant.prenom}} {{ participant.nom}}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+        <div class="col6">
+        </div>
+    </div>
+</div>
+{% endblock %}

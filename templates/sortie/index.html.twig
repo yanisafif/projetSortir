@@ -27,6 +27,12 @@
                         <input type="text" placeholder="search"> <br>
                     </div>
                 </div>
+                <div class="row mx-2 ">
+                    <div class="col-12">
+                        Entre: <input type="date"> et <input type="date">
+                    </div>
+
+                </div>
             </div>
             <div class="col-4">
                 <div>
@@ -54,7 +60,9 @@
                     </label>
                 </div>
             </div>
-            <div class="col-4 d-flex justify-content-center">
+            <div class="col-4 justify-content-center">
+                Date du jour : {{ "now"|date("d/m/Y") }}<br>
+                Participant : <br>
                 <input type="submit" value="Rechercher" class="btn btn-primary mx-auto btn-lg" >
 
             </div>
@@ -77,17 +85,20 @@
                 {% for sortie in sorties %}
                     <tr>
                         <td>{{ sortie.nom }}</td>
-                        <td>{{ sortie.dateHeureDebut|date("m/d/y h:m") }}</td>
-                        <td>{{ sortie.dateLimiteInscription|date("m/d/y") }}</td>
+                        <td>{{ sortie.dateHeureDebut|date("d/m/y h:m") }}</td>
+                        <td>{{ sortie.dateLimiteInscription|date("d/m/y h:m") }}</td>
                         <td>{{ sortie.nbInscriptionsMax }}</td>
                         <td>{{ sortie.etat.libelle }}</td>
                         <td></td>
                         <td></td>
-                        <td></td>
+                        <td><a href="sortie/detail/{{sortie.id}}">Détail</a></td>
                     </tr>
                 {% endfor %}
                 </tbody>
             </table>
+            <div class="col-2">
+            <input type="submit" value="Créer une sortie" class="btn btn-primary mx-auto btn-lg" >
+            </div>
         </div>
     </div>
 {% endblock %}
