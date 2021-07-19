@@ -71,6 +71,12 @@ class Sortie
      */
     private $participants;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Participant::class, inversedBy="sortie")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $participant;
+
     public function __construct()
     {
         $this->participants = new ArrayCollection();
@@ -209,6 +215,18 @@ class Sortie
     public function removeParticipant(Participant $participant): self
     {
         $this->participants->removeElement($participant);
+
+        return $this;
+    }
+
+    public function getParticipant(): ?Participant
+    {
+        return $this->participant;
+    }
+
+    public function setParticipant(?Participant $participant): self
+    {
+        $this->participant = $participant;
 
         return $this;
     }
