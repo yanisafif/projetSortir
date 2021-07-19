@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% include 'inc/nav.html.twig'%}
+    <h1>Gérer les campus</h1>
+
+    <section>
+        <table style="border: 1px black solid">
+            <th>#</th>
+            <th>Nom</th>
+            <th>Actions</th>
+            {% for cam in campus %}
+                <tr style="border: 1px black solid">
+                    <td>{{ cam.id }}</td>
+                    <td>{{ cam.nom }}</td>
+                    <td><a href="{{ path('admin_modif', {'id': cam.id}) }}">Modifier</a> | <a href="{{ path('admin_delete', {'id': cam.id}) }}">Supprimer</a></td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td></td>
+                {{ form_start(form) }}
+                    <td>
+                        {{ form_widget(form.nom) }}
+                        {{ form_rest(form) }}
+                    </td>
+                    <td>
+                        <button type="submit">Ajouter un nouveau campus</button>
+                    </td>
+                {{ form_end(form) }}
+            </tr>
+
+
+        </table>
+    </section>
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+

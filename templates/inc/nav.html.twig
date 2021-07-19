@@ -14,10 +14,10 @@
 
                     {% if is_granted("ROLE_ADMIN") %}
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{# todo: mettre le path #}">Villes</a>
+                            <a class="nav-link active" aria-current="page" href="{{ path('admin_ville') }}">Villes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{# todo: mettre le path #}">Campus</a>
+                            <a class="nav-link active" aria-current="page" href="{{ path('admin_campus') }}">Campus</a>
                         </li>
                     {% endif %}
 

@@ -19,10 +19,6 @@ class Campus
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $idCampus;
 
     /**
      * @ORM\Column(type="string", length=100)
@@ -48,18 +44,6 @@ class Campus
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdCampus(): ?int
-    {
-        return $this->idCampus;
-    }
-
-    public function setIdCampus(int $idCampus): self
-    {
-        $this->idCampus = $idCampus;
-
-        return $this;
     }
 
     public function getNom(): ?string
