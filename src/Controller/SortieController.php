@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Lieu;
 use App\Entity\Ville;
+use App\Form\SortieType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Sortie;
 use App\Entity\Campus;
@@ -19,8 +21,13 @@ class SortieController extends AbstractController
      */
     public function creationSortie(Request $request): Response
     {
-        dd($request);
+        $sortie = new Sortie();
+        $sortieForm = $this->createForm(SortieType::class, $sortie);
+
+        //todo traiter le formulaire
+
         return $this->render('sortie/creation.html.twig', [
+            'sortieForm' => $sortieForm->createView()
         ]);
     }
 
