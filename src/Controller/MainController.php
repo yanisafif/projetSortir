@@ -17,6 +17,6 @@ class MainController extends AbstractController
      * @Route("/creerunesortie", name="main_sortie")
      */
     public function sortie(){
-        return $this->render('main/sortie.html.twig');
+        return $this->render('main/sortie/creation.html.twig');
     }
 }
