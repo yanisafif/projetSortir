@@ -2,7 +2,42 @@
 
 {% block body %}
     {% include 'inc/nav.html.twig'%}
-    elle ville
+
+    <h1>Gérer les villes</h1>
+
+    <section>
+        <table style="border: 1px black solid">
+            <th>#</th>
+            <th>Nom</th>
+            <th>Code postal</th>
+            <th>Actions</th>
+            {% for vi in ville %}
+                <tr style="border: 1px black solid">
+                    <td>{{ vi.id }}</td>
+                    <td>{{ vi.nom }}</td>
+                    <td>{{ vi.codePostal }}</td>
+                    <td><a href="{{ path('admin_modif_ville', {'id': vi.id}) }}">Modifier</a> | <a href="{{ path('admin_delete_ville', {'id': vi.id}) }}">Supprimer</a></td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td></td>
+                {{ form_start(form) }}
+                <td>
+                    {{ form_widget(form.nom) }}
+                </td>
+                <td>
+                    {{ form_widget(form.codePostal) }}
+                    {{ form_rest(form) }}
+                </td>
+                <td>
+                    <button type="submit">Ajouter un nouveau campus</button>
+                </td>
+                {{ form_end(form) }}
+            </tr>
+
+
+        </table>
+    </section>
 {% endblock %}
 
 {% block title %}
