@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Lieu;
+use App\Entity\Ville;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,6 +13,17 @@ use App\Entity\Participant;
 
 class SortieController extends AbstractController
 {
+
+    /**
+     * @Route("/creersortie", name="sortie_creation")
+     */
+    public function creationSortie(Request $request): Response
+    {
+        dd($request);
+        return $this->render('sortie/creation.html.twig', [
+        ]);
+    }
+
     /**
      * @Route("/listesorties", name="sortie")
      */
