@@ -25,7 +25,8 @@ class SortieType extends AbstractType
             ->add('campus', EntityType::class, [
                 'class' => Campus::class,
                 'choice_label' => 'name',
-                'placeholder' => 'Campus'
+                'placeholder' => 'Campus',
+                'label' => 'Campus',
             ])
             ->add('etat')
             ->add('participants')
