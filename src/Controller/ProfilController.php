@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\ParticipantRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,14 +24,20 @@ class ProfilController extends AbstractController
 
 
     /**
-     * @Route("/details/{id}", name="details")
+     * @Route("/{id}", name="detail")
      */
-    public function details(): Response
+        public function detail(int $id, ParticipantRepository $participantRepository): Response
     {
-        return $this->render('profil/details.html.twig', [
-            'controller_name' => 'EnregistrementController',
+        $participant = $participantRepository->find($id);
+        if (!$participant) {
+            $this->addFlash("warning", "Participant non trouvé");
+            return $this->redirectToRoute('sortir');
+        }
+        return $this->render('profil/detail.html.twig', [
+            "participant" => $participant
         ]);
     }
+
 
 
 

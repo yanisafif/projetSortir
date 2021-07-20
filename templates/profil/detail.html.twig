@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Profil
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    {# {% if is_granted('ROLE_USER') %}#}
+    <div class="row">
+        <h1> {{ participant.pseudo }}</h1>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+        </div>
+        <div class="col-3">
+            <img style="height: 200px; width: auto; " src="{{ asset('uploads/photos/'~participant.photo) }}" alt="photo de profil">
+        </div>
+        <div class="col-6">
+            <h3>Prénom : {{ participant.prenom }}</h3>
+            <h3>Nom : {{ participant.nom }}</h3>
+            <h3>Téléphone : {{ participant.telephone }}</h3>
+            <h3>Email : {{ participant.email }}</h3>
+            <h3>Campus : {{ participant.campus.nom }}</h3>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        {#  <a class="btn btn-secondary" href="{{ path("sortie") }}">Retour</a>#}
+        <a class="btn btn-secondary" href="{{ path("main_home") }}">Retour</a>
+    </div>
+    {# {% endif %}#}
+{% endblock %}
