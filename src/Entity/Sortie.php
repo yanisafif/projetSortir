@@ -67,15 +67,15 @@ class Sortie
     private $etat;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Participant::class, inversedBy="sorties")
+     * @ORM\ManyToMany(targetEntity=Participant::class, inversedBy="sortiesParticipant")
      */
     private $participants;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Participant::class, inversedBy="sortie")
+     * @ORM\ManyToOne(targetEntity=Participant::class, inversedBy="sortiesOrganisateur")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $participant;
+    private $organisateur;
 
     public function __construct()
     {
@@ -219,14 +219,14 @@ class Sortie
         return $this;
     }
 
-    public function getParticipant(): ?Participant
+    public function getOrganisateur(): ?Participant
     {
-        return $this->participant;
+        return $this->organisateur;
     }
 
-    public function setParticipant(?Participant $participant): self
+    public function setOrganisateur(?Participant $organisateur): self
     {
-        $this->participant = $participant;
+        $this->organisateur = $organisateur;
 
         return $this;
     }

@@ -27,6 +27,7 @@ class SortieController extends AbstractController
         //todo traiter le formulaire
 
         return $this->render('sortie/creation.html.twig', [
+            'controller_name' => 'EnregistrementController',
             'sortieForm' => $sortieForm->createView()
         ]);
     }
