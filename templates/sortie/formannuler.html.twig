@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SortieController!{% endblock %}
+
+{% block body %}
+
+
+    <div class ="container">
+        <h2>Annuler une sortie</h2>
+        <table class="table">
+            <tr>
+                <td>Nom de la sortie : {{ sortie.0.nom }}</td>
+            </tr>
+            <tr>
+                <td>Date de la sortie : {{ sortie.0.dateHeureDebut|date("d/m/y h:m") }} </td>
+            </tr>
+            <tr>
+                <td>Campus: {{ sortie.0.campus.nom}}</td>
+            </tr>
+            <tr>
+                <td>Lieu :{{ sortie.0.lieu.rue}} {{ sortie.0.lieu.ville.codePostal}} {{ sortie.0.lieu.ville.nom}}</td>
+            </tr>
+            <tr>
+                <td> Motif : <FORM> <TEXTAREA name="nom" rows=4 cols=40>.</TEXTAREA>
+                            </FORM> </td>
+            </tr>
+        </table>
+
+        <a href="http://localhost:8000/sortie/annuler/{{sortie.0.id}}">enregistrer</a>    <input type="submit" value="Annuler">
+            <div class="col6">
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -47,7 +47,7 @@ class SortieController extends AbstractController
 
         return $this->render('sortie/index.html.twig', [
             'sorties' => $sorties,
-            'campus'=> $campus,
+            'campus' => $campus,
         ]);
     }
 
@@ -64,8 +64,8 @@ class SortieController extends AbstractController
 
         return $this->render('sortie/detail.html.twig', [
             'controller_name' => 'EnregistrementController',
-            'sortie'=>$sortie,
-            'participants'=>$participants,
+            'sortie' => $sortie,
+            'participants' => $participants,
         ]);
     }
 
@@ -85,11 +85,24 @@ class SortieController extends AbstractController
 //        $sortie->($etatAnnule);
         $etatAnnule->addSorty($sortie[0]);
 
-        return $this->render('sortie/detail.html.twig', [
+         return $this->redirectToRoute('sortie');
+    }
+
+    /**
+     * @Route("/sortie/formannuler/{id}", name="formannuler")
+     */
+    public function formAnnuler($id): Response
+    {
+        $sortie = $this->getDoctrine()
+            ->getRepository(Sortie::class)
+            ->findById($id);
+        $participants = $sortie[0]->getParticipants();
+
+
+        return $this->render('sortie/formannuler.html.twig', [
             'controller_name' => 'EnregistrementController',
             'sortie' => $sortie,
-            'participants'=>$participants,
-
+            'participants' => $participants,
         ]);
     }
 }
