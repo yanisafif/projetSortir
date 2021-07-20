@@ -13,7 +13,7 @@
                 <tr style="border: 1px black solid">
                     <td>{{ cam.id }}</td>
                     <td>{{ cam.nom }}</td>
-                    <td><a href="{{ path('admin_modif', {'id': cam.id}) }}">Modifier</a> | <a href="{{ path('admin_delete', {'id': cam.id}) }}">Supprimer</a></td>
+                    <td><a href="{{ path('admin_modif_campus', {'id': cam.id}) }}">Modifier</a> | <a href="{{ path('admin_delete_campus', {'id': cam.id}) }}">Supprimer</a></td>
                 </tr>
             {% endfor %}
             <tr>

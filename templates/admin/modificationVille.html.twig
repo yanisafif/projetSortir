@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block body %}
+    {% include 'inc/nav.html.twig'%}
+    <table style="border: 1px black solid">
+        <th>#</th>
+        <th>Nom</th>
+        {% for vi in ville %}
+            <tr style="border: 1px black solid">
+                <td>{{ vi.id }}</td>
+                <td>{{ vi.nom }}</td>
+                <td>{{ vi.codePostal }}</td>
+            </tr>
+        {% endfor %}
+        <tr>
+            <td></td>
+            {{ form_start(form) }}
+            <td>
+                {{ form_widget(form.nom) }}
+            </td>
+            <td>
+                {{ form_widget(form.codePostal) }}
+                {{ form_rest(form) }}
+            </td>
+            <td>
+                <button type="submit">Modifier la ville</button>
+            </td>
+            {{ form_end(form) }}
+        </tr>
+
+
+    </table>
+{% endblock %}
+
