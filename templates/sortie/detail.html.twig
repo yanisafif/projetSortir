@@ -1,3 +1,4 @@
+
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello SortieController!{% endblock %}
@@ -14,23 +15,23 @@
         </tr>
         <tr>
             <td>Date et heure de la sortie : {{ sortie.0.dateHeureDebut|date("d/m/y h:m") }} </td>
-            <td> Lieu : </td>
+            <td> Lieu :{{ sortie.0.lieu.nom}} </td>
         </tr>
         <tr>
             <td>Date limite d'inscription : {{ sortie.0.dateLimiteInscription|date("d/m/y h:m") }}</td>
-            <td>Rue : </td>
+            <td>Rue :{{ sortie.0.lieu.rue}} </td>
         </tr>
         <tr>
             <td>Nombre de places : {{ sortie.0.nbInscriptionsMax }}</td>
-            <td>Code postal : </td>
+            <td>Code postal : {{ sortie.0.lieu.ville.codePostal}}</td>
         </tr>
         <tr>
             <td>Durée/minutes : {{ sortie.0.duree }}</td>
-            <td>Latitude : </td>
+            <td>Latitude : {{ sortie.0.lieu.latitude }} </td>
         </tr>
         <tr>
             <td>Description et infos : {{ sortie.0.infosSortie }}</td>
-            <td>Longitude : </td>
+            <td>Longitude : {{ sortie.0.lieu.longitude }}</td>
         </tr>
     </table>
     <div class="row">

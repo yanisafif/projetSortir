@@ -12,6 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Sortie;
 use App\Entity\Campus;
 use App\Entity\Participant;
+Use App\Entity\Etat;
 
 class SortieController extends AbstractController
 {
@@ -65,6 +66,30 @@ class SortieController extends AbstractController
             'controller_name' => 'EnregistrementController',
             'sortie'=>$sortie,
             'participants'=>$participants,
+        ]);
+    }
+
+    /**
+     * @Route("/sortie/annuler/{id}", name="annulersortie")
+     */
+    public function annulerSortie($id): Response
+    {
+        $sortie = $this->getDoctrine()
+            ->getRepository(Sortie::class)
+            ->findById($id);
+        $participants = $sortie[0]->getParticipants();
+
+        $etatAnnule = $this->getDoctrine()
+            ->getRepository(Etat::class)
+            ->findOneById($id);
+//        $sortie->($etatAnnule);
+        $etatAnnule->addSorty($sortie[0]);
+
+        return $this->render('sortie/detail.html.twig', [
+            'controller_name' => 'EnregistrementController',
+            'sortie' => $sortie,
+            'participants'=>$participants,
+
         ]);
     }
 }
