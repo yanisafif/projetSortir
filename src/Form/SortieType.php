@@ -47,7 +47,7 @@ class SortieType extends AbstractType
                 'label' => 'Etat',
                 'mapped' => false,])
             ->add('participants')
-            ->add('participant')
+            ->add('organisateur')
         ;
     }
 

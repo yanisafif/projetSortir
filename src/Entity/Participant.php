@@ -85,17 +85,17 @@ class Participant implements UserInterface
     /**
      * @ORM\ManyToMany(targetEntity=Sortie::class, mappedBy="participants")
      */
-    private $sorties;
+    private $sortiesParticipant;
 
     /**
-     * @ORM\OneToMany(targetEntity=Sortie::class, mappedBy="participant")
+     * @ORM\OneToMany(targetEntity=Sortie::class, mappedBy="organisateur")
      */
-    private $sortie;
+    private $sortiesOrganisateur;
 
     public function __construct()
     {
-        $this->sorties = new ArrayCollection();
-        $this->sortie = new ArrayCollection();
+        $this->sortiesParticipant = new ArrayCollection();
+        $this->sortiesOrganisateur = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -292,13 +292,13 @@ class Participant implements UserInterface
      */
     public function getSorties(): Collection
     {
-        return $this->sorties;
+        return $this->sortiesParticipant;
     }
 
     public function addSorty(Sortie $sorty): self
     {
-        if (!$this->sorties->contains($sorty)) {
-            $this->sorties[] = $sorty;
+        if (!$this->sortiesParticipant->contains($sorty)) {
+            $this->sortiesParticipant[] = $sorty;
             $sorty->addParticipant($this);
         }
 
@@ -307,7 +307,7 @@ class Participant implements UserInterface
 
     public function removeSorty(Sortie $sorty): self
     {
-        if ($this->sorties->removeElement($sorty)) {
+        if ($this->sortiesParticipant->removeElement($sorty)) {
             $sorty->removeParticipant($this);
         }
 
@@ -319,14 +319,14 @@ class Participant implements UserInterface
      */
     public function getSortie(): Collection
     {
-        return $this->sortie;
+        return $this->sortiesOrganisateur;
     }
 
     public function addSortie(Sortie $sortie): self
     {
-        if (!$this->sortie->contains($sortie)) {
-            $this->sortie[] = $sortie;
-            $sortie->setParticipant($this);
+        if (!$this->sortiesOrganisateur->contains($sortie)) {
+            $this->sortiesOrganisateur[] = $sortie;
+            $sortie->setOrganisateur($this);
         }
 
         return $this;
@@ -334,10 +334,10 @@ class Participant implements UserInterface
 
     public function removeSortie(Sortie $sortie): self
     {
-        if ($this->sortie->removeElement($sortie)) {
+        if ($this->sortiesOrganisateur->removeElement($sortie)) {
             // set the owning side to null (unless already changed)
-            if ($sortie->getParticipant() === $this) {
-                $sortie->setParticipant(null);
+            if ($sortie->getOrganisateur() === $this) {
+                $sortie->setOrganisateur(null);
             }
         }
 
