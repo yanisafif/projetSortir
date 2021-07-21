@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% include 'inc/nav.html.twig'%}
+    {{ form_start(sortieForm) }}
+
+    {{ form_widget(sortieForm) }}
+    <button type="submit">Modifier ma sortie</button>
+    <button><a href="{{ path('sortie') }}">Annuler</a></button>
+    {{ form_end(sortieForm) }}
+
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+
