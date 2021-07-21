@@ -3,8 +3,8 @@
 {% block title %}Hello SortieController!{% endblock %}
 
 {% block body %}
-
-
+    {% include('inc/nav.html.twig') %}
+    {{ dump(user) }}
     <div class ="container">
         <h2>Annuler une sortie</h2>
         <table class="table">

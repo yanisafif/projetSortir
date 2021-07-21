@@ -74,17 +74,18 @@ class SortieController extends AbstractController
      */
     public function annulerSortie($id): Response
     {
+        $em=$this->getDoctrine()->getManager();
         $sortie = $this->getDoctrine()
             ->getRepository(Sortie::class)
             ->findById($id);
-        $participants = $sortie[0]->getParticipants();
 
         $etatAnnule = $this->getDoctrine()
             ->getRepository(Etat::class)
-            ->findOneById($id);
+            ->findOneBy(array('libelle' => 'Annulée'));
 //        $sortie->($etatAnnule);
         $etatAnnule->addSorty($sortie[0]);
-
+        $em->persist($etatAnnule);
+        $em->flush();
          return $this->redirectToRoute('sortie');
     }
 
@@ -105,4 +106,24 @@ class SortieController extends AbstractController
             'participants' => $participants,
         ]);
     }
+
+    /**
+     * @Route("/sortie/desiste/{id}", name="desiste")
+     */
+    public function desiste($id): Response
+    {
+        $sortie = $this->getDoctrine()
+            ->getRepository(Sortie::class)
+            ->findById($id);
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $participant = $this->getDoctrine()
+            ->getRepository(Participant::class)
+            ->findOneBy(array('pseudo' => $user));
+
+//        $sortie->removeParticipant($participant[0]);
+
+
+//        return $this->redirectToRoute('sortie');
+    }
+//    Request $request)
 }
