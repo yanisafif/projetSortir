@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil - {{ parent() }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="card">
+            <img  src="{{ asset('/uploads/photos/'~participant.photo) }}" alt="photo de profil" class="card-img-top" >
+
+            <div class="card-body text-center">
+                <h2 class="card-title"> {{ participant.pseudo }}</h2>
+                <p class="card-text">Prénom : {{ participant.prenom }}</p>
+                <p class="card-text">Nom : {{ participant.nom }}</p>
+                <p class="card-text">Téléphone : {{ participant.telephone }}</p>
+                <p class="card-text">Email : {{ participant.email }}</p>
+                <p class="card-text">Campus : {{ participant.campus.nom }}</p>
+            </div>
+            <div class="card-footer text-center">
+                <a class="btn btn-lg btn-primary" href="{{ path("sortie") }}">Retour</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

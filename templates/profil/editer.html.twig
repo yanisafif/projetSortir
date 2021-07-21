@@ -1,20 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello EnregistrementController!{% endblock %}
+{% block title %}Mon profil - {{ parent() }}|{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <div class="container">
+        <h2 style="text-align: center">Mon profil</h2>
+        {{ form_start(formParticipant) }}
+        <div class="my-custom-class-for-errors">
+            {{ form_errors(formParticipant) }}
+        </div>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/projetSortir/src/Controller/EnregistrementController.php'|file_link(0) }}">src/Controller/EnregistrementController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64/www/projetSortir/templates/enregistrement/index.html.twig'|file_link(0) }}">templates/enregistrement/index.html.twig</a></code></li>
-    </ul>
-</div>
+        {{ form_row(formParticipant.pseudo) }}
+        {#  {% if  %}#}
+        {{ form_row(formParticipant.prenom, {
+            label: 'Prénom'
+        }) }}
+        {{ form_row(formParticipant.nom) }}
+        {{ form_row(formParticipant.telephone, {
+            label: 'Téléphone'
+        }) }}
+        {{ form_row(formParticipant.email) }}
+        {{ form_row(formParticipant.password) }}
+        {{ form_row(formParticipant.campus) }}
+        {{ form_row(formParticipant.maPhoto, {
+            label: 'Ma photo'
+        }) }}
+        <button type="submit" name="btnValider" class="btn btn-primary btn-sm mt-2">Enregistrer</button>
+        <button type="reset" class="btn btn-primary btn-sm mt-2">Annuler</button>
+        {{ form_end(formParticipant) }}
+    </div>
 {% endblock %}
