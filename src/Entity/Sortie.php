@@ -83,6 +83,11 @@ class Sortie
      */
     private $lieu;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $nombreInscrit;
+
     public function __construct()
     {
         $this->participants = new ArrayCollection();
@@ -245,6 +250,18 @@ class Sortie
     public function setLieu(?Lieu $lieu): self
     {
         $this->lieu = $lieu;
+
+        return $this;
+    }
+
+    public function getNombreInscrit(): ?int
+    {
+        return $this->nombreInscrit;
+    }
+
+    public function setNombreInscrit(int $nombreInscrit): self
+    {
+        $this->nombreInscrit = $nombreInscrit;
 
         return $this;
     }

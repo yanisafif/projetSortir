@@ -26,7 +26,7 @@
             label: 'Ma photo'
         }) }}
         <button type="submit" name="btnValider" class="btn btn-primary btn-sm mt-2">Enregistrer</button>
-        <button type="reset" class="btn btn-primary btn-sm mt-2">Annuler</button>
+        <a class="btn btn-primary btn-sm mt-2" href="{{ path("sortie_liste") }}">Annuler</a>
         {{ form_end(formParticipant) }}
     </div>
 {% endblock %}

@@ -20,11 +20,6 @@ class Etat
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $idEtat;
-
-    /**
      * @ORM\Column(type="string", length=100)
      */
     private $libelle;

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello SortieController!{% endblock %}
+{% block title %}ListeSorties - {{ parent() }}{% endblock %}
 
 {% block body %}
     <div class="container-fluid">
@@ -87,11 +87,12 @@
                         <td>{{ sortie.nom }}</td>
                         <td>{{ sortie.dateHeureDebut|date("d/m/y h:m") }}</td>
                         <td>{{ sortie.dateLimiteInscription|date("d/m/y h:m") }}</td>
-                        <td>{{ sortie.nbInscriptionsMax }}</td>
+                        <td> {{ sortie.nombreInscrit }}/ {{ sortie.nbInscriptionsMax }}</td>
                         <td>{{ sortie.etat.libelle }}</td>
                         <td></td>
-                        <td></td>
-                        <td><a href="sortie/detail/{{sortie.id}}">Afficher</a>-<a href="sortie/annuler/{{sortie.id}}">Annuler</a></td>
+                        <td>{{ sortie.organisateur.nom }}</td>
+                        <td><a href="detail/{{sortie.id}}">Afficher</a>-<a href="annuler/{{sortie.id}}">Annuler</a>
+                            - <a href="inscription/{{ sortie.id }}" >S'inscrire</a></td>
                     </tr>
                 {% endfor %}
                 </tbody>

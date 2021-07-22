@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+{% block title %}Inscription Sortie - {{ parent() }}{% endblock %}
+{% block body %}
+    {% block main %}
+        <div class="container">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h2 class="card-title">Félicitations ! Vous êtes inscrit à la sortie {{ sortie.nom}} ! </h2>
+                    <p class="card-text">Date de la sortie {{ sortie.dateHeureDebut|date("d/m/y h:m") }}</p>
+                    <p class="card-text">Date limite d'inscription : {{ sortie.dateLimiteInscription|date("d/m/y h:m")}}</p>
+                    <p class="card-text">Campus : {{ sortie.campus.nom }}</p>
+                    <p class="card-text">Lieu : {{ sortie.lieu.nom }}</p>
+                    <p class="card-text">Nombre de places : {{ sortie.nbInscriptionsMax }}</p>
+                    <p class="card-text">Nombre d'inscrits : {{ nombreDInscrits}}</p>
+                    <p class="card-text">Pseudo: {{participant.pseudo}}</p>
+                    <p class="card-text">Nom du participant: {{participant.nom}}</p>
+                    <p class="card-text">Prénom du participant: {{participant.prenom}}</p>
+                </div>
+                <div class="card-footer text-center">
+                    <a  class="btn btn-lg btn-primary" href="{{ path("sortie_liste") }}">Retour</a>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+{% endblock %}

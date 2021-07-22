@@ -5,8 +5,10 @@ namespace App\Controller;
 use App\Entity\Lieu;
 use App\Entity\Ville;
 use App\Form\SortieType;
+use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -165,4 +167,45 @@ class SortieController extends AbstractController
 //        return $this->redirectToRoute('sortie_liste');
     }
 //    Request $request)
+
+    /**
+     * @Route("/inscription/{id}", name="inscription", requirements={"id"="\d+"})
+     *
+     */
+    public function inscriptionSortie(int $id,
+                                      EntityManagerInterface $entityManager,
+                                      SortieRepository $sortieRepository,
+                                      ParticipantRepository $participantRepository):Response
+    {
+
+        $sortie = $sortieRepository->find($id);
+        $nombreDInscrits = $sortie->getNombreInscrit();
+        $nombreDInscritsMax = $sortie->getNbInscriptionsMax();
+        $participant = $participantRepository->find(432); // TODO  id user
+        if ($sortie->getEtat()->getLibelle() !== 'Ouverte') {
+            $this->addFlash('warning', "La sortie n'est pas encore ouverte");
+            return $this->redirectToRoute('sortie_liste');
+        }
+        elseif ($sortie->getDateLimiteInscription() > new \DateTime('now'))
+        {
+            $this->addFlash('warning', "Echec de l'inscription. La date limite d'inscription est dépassée");
+            return $this->redirectToRoute('sortie_liste');
+        }
+        elseif ($nombreDInscrits >= $nombreDInscritsMax) {
+            $this->addFlash('warning', "Echec de l'inscription. Le nombre maximal de participants a été atteint");
+            return $this->redirectToRoute('sortie_liste');
+        }
+        else {
+            $sortie->addParticipant($participant);
+            $sortie->setNombreInscrit($nombreDInscrits+1);
+            $entityManager->persist($sortie);
+            $entityManager->flush();
+            $this->addFlash('success', 'Votre inscription a bien été prise en compte');
+        }
+        return $this->render('sortie/inscription.html.twig', [
+            "nombreDInscrits" => $nombreDInscrits,
+            "participant"=> $participant,
+            "sortie" =>$sortie
+        ]);
+    }
 }

@@ -63,18 +63,10 @@ class ProfilController extends AbstractController
         $participant = $participantRepository->find($id);
         if (!$participant) {
             $this->addFlash("warning", "Participant non trouvé");
-            return $this->redirectToRoute('sortie');
+            return $this->redirectToRoute('sortie_liste');
         }
         return $this->render('profil/profil.html.twig', [
             "participant" => $participant
         ]);
     }
-
-
-
-
-
-
-
-
 }
