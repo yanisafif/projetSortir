@@ -131,7 +131,7 @@ class SortieController extends AbstractController
     }
 
     /**
-     * @Route("annuler/form/{id}", name="annuler_form")
+     * @Route("/annuler/form/{id}", name="annuler_form")
      */
     public function formAnnuler($id): Response
     {
