@@ -180,6 +180,7 @@ class SortieController extends AbstractController
         $sortie = $sortieRepository->find($id);
         $nombreDInscrits = $sortie->getNombreInscrit();
         $nombreDInscritsMax = $sortie->getNbInscriptionsMax();
+        //$participant = $participantRepository->find(452);
         $participant = $participantRepository->find($this->getUser()->getId());
         if ($sortie->getEtat()->getLibelle() !== 'Ouverte') {
             $this->addFlash('warning', "La sortie n'est pas encore ouverte");
@@ -195,11 +196,14 @@ class SortieController extends AbstractController
             return $this->redirectToRoute('sortie_liste');
         }
         else {
+            if(!$sortie->getParticipants()->contains($participant))
+            {
             $sortie->addParticipant($participant);
             $sortie->setNombreInscrit($nombreDInscrits+1);
             $entityManager->persist($sortie);
             $entityManager->flush();
             $this->addFlash('success', 'Votre inscription a bien été prise en compte');
+            }else{ return $this->redirectToRoute('sortie_liste');}
         }
         return $this->render('sortie/inscription.html.twig', [
             "nombreDInscrits" => $nombreDInscrits,
