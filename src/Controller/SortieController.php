@@ -177,11 +177,10 @@ class SortieController extends AbstractController
                                       SortieRepository $sortieRepository,
                                       ParticipantRepository $participantRepository):Response
     {
-
         $sortie = $sortieRepository->find($id);
         $nombreDInscrits = $sortie->getNombreInscrit();
         $nombreDInscritsMax = $sortie->getNbInscriptionsMax();
-        $participant = $participantRepository->find(432); // TODO  id user
+        $participant = $participantRepository->find($this->getUser()->getId());
         if ($sortie->getEtat()->getLibelle() !== 'Ouverte') {
             $this->addFlash('warning', "La sortie n'est pas encore ouverte");
             return $this->redirectToRoute('sortie_liste');

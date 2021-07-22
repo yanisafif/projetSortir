@@ -20,7 +20,9 @@
             label: 'Téléphone'
         }) }}
         {{ form_row(formParticipant.email) }}
-        {{ form_row(formParticipant.password) }}
+        {{ form_row(formParticipant.plainPassword.first) }}
+        {{ form_row(formParticipant.plainPassword.second) }}
+       {#{{ form_row(formParticipant.password) }}#}
         {{ form_row(formParticipant.campus) }}
         {{ form_row(formParticipant.maPhoto, {
             label: 'Ma photo'

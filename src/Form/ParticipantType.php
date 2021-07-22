@@ -27,8 +27,9 @@ class ParticipantType extends AbstractType
             ->add('nom')
             ->add('telephone')
             ->add('email')
-            ->add('password', RepeatedType::class, [
+            ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
+                'mapped' => false,
                 'invalid_message' => 'Les mots de passe ne correspondent pas',
                 'options' => ['attr' => ['class' => 'password-field']],
                 'required' => true,

@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 /**
@@ -25,12 +26,17 @@ class ProfilController extends AbstractController
                            ParticipantRepository $participantRepository,
                            Request $request,
                            EntityManagerInterface $entityManager,
+                           UserPasswordEncoderInterface $passwordEncoder,
                            SluggerInterface $slugger): Response
     {
         $participant = $participantRepository->find($id);
         $formParticipant = $this->createForm(ParticipantType::class, $participant);
         $formParticipant->handleRequest($request);
         if ($formParticipant->isSubmitted() && $formParticipant->isValid()) {
+            $participant->setPassword(
+                $passwordEncoder->encodePassword(
+                    $participant,
+                    $formParticipant->get('plainPassword')->getData()));
             /** @var UploadedFile $photoFile */
             $photoFile = $formParticipant->get('maPhoto')->getData();
             if ($photoFile) {
